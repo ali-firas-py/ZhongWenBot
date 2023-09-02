@@ -10,11 +10,12 @@ class WikiView(View):
         super().__init__(timeout=timeout)
 
     async def update(self, interaction: Interaction):
-        embed = Embed(title=self.chars[self.page])
+        embed = Embed(title=self.chars[self.page - 1])
+        
         if self.page == 1:
             embed.set_footer(text="Hint: you can jump to any page by choosing an index (ex: /wiki 42)")
 
-        await interaction.message.edit(embed=embed)
+        await interaction.response.edit_message(embed=embed)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
