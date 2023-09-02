@@ -13,17 +13,15 @@ class WikiView(View):
         embed = Embed(title=self.chars[self.page])
         if self.page == 1:
             embed.set_footer(text="Hint: you can jump to any page by choosing an index (ex: /wiki 42)")
-            
+
         await interaction.message.edit(embed=embed)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
         self.page = (self.page - 1) % len(self.chars)
-        await interaction.response.send_message("goin left")
         await self.update(interaction)
 
     @button(style=ButtonStyle.blurple, custom_id="next", emoji="➡️")
     async def next(self, interaction: Interaction, button: Button):
-        self.page = (self.page - 1) % len(self.chars)
-        await interaction.response.send_message("goin right")
+        self.page = (self.page + 1) % len(self.chars)
         await self.update(interaction)
