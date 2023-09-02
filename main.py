@@ -11,9 +11,9 @@ logging.basicConfig(level=logging.ERROR)
 
 class ZhongWenBot(commands.Bot):
     def __init__(self, *args, **kwargs):
-        for color, *RGB in kwargs.pop("colors"):
+        for color, RGB in kwargs.pop("colors").items():
             setattr(self, color, discord.Color.from_rgb(*RGB))
-            
+
         super().__init__(*args, **kwargs)
 
     async def setup_hook(self):
