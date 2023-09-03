@@ -1,9 +1,11 @@
 from discord.ext import commands
 from discord import app_commands, Interaction, Embed
 
+from utils.classes import ZhongWenBot
+
 
 class UtilCommands(commands.Cog):
-    def __init__(self, bot: commands.Bot):
+    def __init__(self, bot: ZhongWenBot):
         self.bot = bot
 
     @app_commands.command(description="Shows a list of commands.")
@@ -18,5 +20,5 @@ class UtilCommands(commands.Cog):
         await interaction.response.send_message(embed=embed)
 
 
-async def setup(bot: commands.Bot):
+async def setup(bot):
     await bot.add_cog(UtilCommands(bot))

@@ -1,21 +1,32 @@
 from discord.ui import View, Button, button
 from discord import ButtonStyle, Interaction, Embed
-from discord.ext.commands import Bot
+
+from utils.classes import ZhongWenBot
 
 
 class WikiView(View):
-    def __init__(self, *, page: int, timeout=120.0):
+    def __init__(self, bot: ZhongWenBot, *, page: int, hide_info: bool, timeout=120.0):
+        self.bot = bot
         self.page = page
-        self.chars = ['a', 'b', 'c', 'd']
+        self.hide_info = hide_info
+
         super().__init__(timeout=timeout)
 
     async def update(self, interaction: Interaction):
-        embed = Embed(title=self.chars[self.page - 1])
-        
-        if self.page == 1:
-            embed.set_footer(text="Hint: you can jump to any page by choosing an index (ex: /wiki 42)")
+        char = self.bot.Zi.hsk1.get(self.page)
 
-        await interaction.response.edit_message(embed=embed)
+        if self.hide_info:
+            description = f"Pinyin: ||{char.pinyin}||\nMeaning: ||{char.english}||"
+            value = f"Pinyin: ||{char.sentence_pinyin}||\nMeaning: ||{char.sentence_english}||"
+            embed = Embed(title=f"{char}", description=description, color=self.bot.green)
+            embed.add_field(name=f"{char.sentence}", value=value)
+        
+        else:
+            embed = Embed(title=f"{char} ({char.pinyin})", description=char.english, color=self.bot.green)
+            embed.add_field(name=f"{char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
+            embed.set_footer(text=f"id: {char.id}")
+    
+        await interaction.response.edit_message(embed=embed, color=self.bot.green)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):

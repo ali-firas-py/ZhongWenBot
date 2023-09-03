@@ -1,28 +1,12 @@
-from discord.ext import commands
 import discord
 import asyncio
 import logging
 
 from config import prefix, TOKEN, owner_id, colors
+from utils.classes import ZhongWenBot
 
 
 logging.basicConfig(level=logging.ERROR)
-
-
-class ZhongWenBot(commands.Bot):
-    def __init__(self, *args, **kwargs):
-        for color, RGB in kwargs.pop("colors").items():
-            setattr(self, color, discord.Color.from_rgb(*RGB))
-
-        super().__init__(*args, **kwargs)
-
-    async def setup_hook(self):
-        print(f"Syncing app commands...")
-        synced = await self.tree.sync()
-        print(f"Synced {len(synced)} commands.")
-
-    async def on_ready(self):
-        print(f"{self.user.name} is ready.\n")
 
 
 async def main():
