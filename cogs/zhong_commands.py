@@ -18,11 +18,14 @@ class ZhongCommands(commands.Cog):
 
         if hide_info:
             description = f"Pinyin: ||{char.pinyin}||\nMeaning: ||{char.english}||"
+            value = f"Pinyin: ||{char.sentence_pinyin}||\nMeaning: ||{char.sentence_english}||"
             embed = Embed(title=f"{char}", description=description, color=self.bot.green)
+            embed.add_field(name=f"{char.sentence}", value=value)
         
         else:
-            embed = Embed(title=f"{char} ({char.pinyin})", description=char.english, color=self.bot.green)
-            embed.add_field(name=f"{char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
+            description = f"# {char} ({char.pinyin})\n{char.english}"
+            embed = Embed(description, color=self.bot.green)
+            embed.add_field(name=f"# {char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
             embed.set_footer(text=f"id: {char.id}")
             
         await interaction.response.send_message(embed=embed, view=WikiView(self.bot, page, hide_info))

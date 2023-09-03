@@ -8,6 +8,7 @@ class WikiView(View):
     def __init__(self, bot: ZhongWenBot, page: int, hide_info: bool, timeout=120.0):
         self.bot = bot
         self.page = page
+        self.pages = len(bot.Zi.hsk1)
         self.hide_info = hide_info
 
         super().__init__(timeout=timeout)
@@ -22,18 +23,19 @@ class WikiView(View):
             embed.add_field(name=f"{char.sentence}", value=value)
         
         else:
-            embed = Embed(title=f"{char} ({char.pinyin})", description=char.english, color=self.bot.green)
-            embed.add_field(name=f"{char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
+            description = f"# {char} ({char.pinyin})\n{char.english}"
+            embed = Embed(description, color=self.bot.green)
+            embed.add_field(name=f"# {char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
             embed.set_footer(text=f"id: {char.id}")
     
         await interaction.response.edit_message(embed=embed)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
-        self.page = (self.page - 1) % len(self.bot.Zi.hsk1)
+        self.page = (self.pages + self.page - 1) % self.pages
         await self.update(interaction)
 
     @button(style=ButtonStyle.blurple, custom_id="next", emoji="➡️")
     async def next(self, interaction: Interaction, button: Button):
-        self.page = (self.page + 1) % len(self.bot.Zi.hsk1)
+        self.page = (self.pages + self.page + 1) % self.pages
         await self.update(interaction)
