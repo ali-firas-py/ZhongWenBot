@@ -25,7 +25,7 @@ class ZhongCommands(commands.Cog):
             embed.add_field(name=f"{char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
             embed.set_footer(text=f"id: {char.id}")
             
-        await interaction.response.send_message(embed=embed, view=WikiView(page=page, hide_info=hide_info))
+        await interaction.response.send_message(embed=embed, view=WikiView(self.bot, page, hide_info))
 
 
 async def setup(bot):

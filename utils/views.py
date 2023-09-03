@@ -5,7 +5,7 @@ from utils.classes import ZhongWenBot
 
 
 class WikiView(View):
-    def __init__(self, bot: ZhongWenBot, *, page: int, hide_info: bool, timeout=120.0):
+    def __init__(self, bot: ZhongWenBot, page: int, hide_info: bool, timeout=120.0):
         self.bot = bot
         self.page = page
         self.hide_info = hide_info
