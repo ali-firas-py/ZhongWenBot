@@ -24,7 +24,7 @@ class ZhongCommands(commands.Cog):
         
         else:
             description = f"# {char} ({char.pinyin})\n{char.english}"
-            embed = Embed(description, color=self.bot.green)
+            embed = Embed(description=description, color=self.bot.green)
             embed.add_field(name=f"# {char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
             embed.set_footer(text=f"id: {char.id}")
             
