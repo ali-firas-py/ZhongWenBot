@@ -158,7 +158,7 @@ data = {
         'sentence': '他们都很高兴。',
         'sentence_pinyin': 'Tāmen dōu hěn gāoxìng.',
         'sentence_meaning': 'They are all happy.'
-    }
+    },
     '读': {
         'id': 21,
         'pinyin': 'dú',
