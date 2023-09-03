@@ -27,7 +27,7 @@ class ZhongWenBot(commands.Bot):
 class Zi:
     hsk1: Dict[int, "Zi"] = {}
 
-    def __init__(self, *, char: str, pinyin: str, translations: tuple, sentence: str, sentence_pinyin: str, sentence_meaning: str) -> None:
+    def __init__(self, *, id: int, char: str, pinyin: str, translations: tuple, sentence: str, sentence_pinyin: str, sentence_meaning: str) -> None:
         self.id = id
         self.char = char
         self.pinyin = pinyin
