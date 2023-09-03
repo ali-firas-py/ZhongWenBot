@@ -26,7 +26,7 @@ class WikiView(View):
             embed.add_field(name=f"{char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
             embed.set_footer(text=f"id: {char.id}")
     
-        await interaction.response.edit_message(embed=embed, color=self.bot.green)
+        await interaction.response.edit_message(embed=embed)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
