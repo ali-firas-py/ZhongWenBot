@@ -30,10 +30,10 @@ class WikiView(View):
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
-        self.page = (self.page - 1) % len(self.chars)
+        self.page = (self.page - 1) % len(self.bot.Zi.hsk1)
         await self.update(interaction)
 
     @button(style=ButtonStyle.blurple, custom_id="next", emoji="➡️")
     async def next(self, interaction: Interaction, button: Button):
-        self.page = (self.page + 1) % len(self.chars)
+        self.page = (self.page + 1) % len(self.bot.Zi.hsk1)
         await self.update(interaction)
