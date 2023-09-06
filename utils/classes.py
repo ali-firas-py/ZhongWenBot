@@ -8,11 +8,10 @@ from res import hsk1
 
 class ZhongWenBot(commands.Bot):
     def __init__(self, *args, **kwargs):
-        self.Zi = Zi.init()
-
         for color, RGB in kwargs.pop("colors").items():
             setattr(self, color, Color.from_rgb(*RGB))
 
+        self.Zi: Zi = Zi.init()
         super().__init__(*args, **kwargs)
 
     async def setup_hook(self):

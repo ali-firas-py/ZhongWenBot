@@ -26,16 +26,16 @@ class WikiView(View):
             description = f"# {char} ({char.pinyin})\n{char.english}"
             embed = Embed(description=description, color=self.bot.green)
             embed.add_field(name=f"# {char.sentence} ({char.sentence_pinyin})", value=char.sentence_english)
-            embed.set_footer(text=f"id: {char.id}")
+            embed.set_footer(text=f"Page: {self.page + 1}/{self.pages}")
     
         await interaction.response.edit_message(embed=embed)
 
     @button(style=ButtonStyle.blurple, custom_id="previous", emoji="⬅️")
     async def previous(self, interaction: Interaction, button: Button):
-        self.page = (self.pages + self.page - 1) % self.pages
+        self.page = self.page - 1
         await self.update(interaction)
 
     @button(style=ButtonStyle.blurple, custom_id="next", emoji="➡️")
     async def next(self, interaction: Interaction, button: Button):
-        self.page = (self.pages + self.page + 1) % self.pages
+        self.page = (self.page + 1) % self.pages
         await self.update(interaction)
