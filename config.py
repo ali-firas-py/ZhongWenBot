@@ -1,7 +1,7 @@
 """ZhongWenbot Configuraiton"""
 
 
-TOKEN: str = "MTExMDMwODE4MzUzODQyMTg1MA.Gu7lXj.Z4snJVtSrwK5PRK6SfvRkrBZ6u1gxjhuMYJIqw"
+TOKEN: str = ""
 prefix: str = "z!"
 owner_id: int = 424655090108989440
 
